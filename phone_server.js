@@ -610,7 +610,16 @@ Accounts.createUserWithPhone = function (options, callback) {
         throw new Error("Accounts.createUser with callback not supported on the server yet.");
     }
 
-    return createUser(options);
+    const userId = createUser(options);
+
+    // If `Accounts._options.sendPhoneVerificationCodeOnCreation` is set, register
+    // a token to verify the user's primary phone, and send it to
+    // by sms.
+    if (options.phone && Accounts._options.sendPhoneVerificationCodeOnCreation) {
+        Accounts.sendPhoneVerificationCode(userId, options.phone);
+    }
+
+    return {userId: userId}
 };
 
 ///
