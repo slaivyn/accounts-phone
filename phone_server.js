@@ -120,6 +120,12 @@ var findUserFromUserQuery = function (user) {
     return user;
 };
 
+Accounts.findUserByPhone = function(phoneNumber) {
+    return findUserFromUserQuery({
+        phone: phoneNumber
+    })
+}
+
 // XXX maybe this belongs in the check package
 var NonEmptyString = Match.Where(function (x) {
     check(x, String);
