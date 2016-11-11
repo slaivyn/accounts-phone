@@ -1,12 +1,8 @@
 Package.describe({
-    name         : 'okland:accounts-phone',
-    version      : '0.0.21',
-    // Brief, one-line summary of the package.
+    name         : 'slaivyn:accounts-phone',
+    version      : '0.0.22',
     summary      : 'A login service based on mobile phone number, For Meteor.',
-    // URL to the Git repository containing the source code for this package.
-    git          : 'https://github.com/okland/accounts-phone',
-    // By default, Meteor will default to using README.md for documentation.
-    // To avoid submitting documentation, set this field to null.
+    git          : 'https://github.com/slaivyn/accounts-phone',
     documentation: 'README.md'
 });
 
@@ -17,20 +13,22 @@ Npm.depends({
 });
 
 Package.onUse(function (api) {
-    api.use('npm-bcrypt@=0.7.8_2', 'server');
+    api.versionsFrom('1.4.1.3')
 
-    api.use('accounts-base@1.0.2', ['client', 'server']);
+    api.use('ecmascript')
+    api.use('accounts-base', ['client', 'server']);
     // Export Accounts (etc) to packages using this one.
-    api.imply('accounts-base@1.0.2', ['client', 'server']);
-    api.use('srp@1.0.2', ['client', 'server']);
-    api.use('sha@1.0.2', ['client', 'server']);
-    api.use('email@1.0.5', ['server']);
-    api.use('random@1.0.2', ['server']);
-    api.use('ejson@1.0.5', 'server');
-    api.use('callback-hook@1.0.2', 'server');
-    api.use('check@1.0.4');
-    api.use('underscore@1.0.2');
-    api.use('ddp@1.0.14', ['client', 'server']);
+    api.imply('accounts-base', ['client', 'server']);
+    api.use('npm-bcrypt', 'server');
+    api.use('srp', ['client', 'server']);
+    api.use('sha', ['client', 'server']);
+    api.use('email', ['server']);
+    api.use('random', ['server']);
+    api.use('ejson', 'server');
+    api.use('callback-hook', 'server');
+    api.use('check');
+    api.use('underscore');
+    api.use('ddp', ['client', 'server']);
     api.addFiles('sms_server.js', 'server');
     api.addFiles('phone_server.js', 'server');
     api.addFiles('phone_client.js', 'client');
@@ -40,7 +38,7 @@ Package.onUse(function (api) {
 });
 
 Package.onTest(function (api) {
-    api.use(['okland:accounts-phone', 'tinytest', 'test-helpers', 'tracker',
+    api.use(['slaivyn:accounts-phone', 'tinytest', 'test-helpers', 'tracker',
         'accounts-base', 'random', 'underscore', 'check',
         'ddp']);
     api.addFiles('phone_tests_setup.js', 'server');

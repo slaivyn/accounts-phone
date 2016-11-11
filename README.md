@@ -13,19 +13,6 @@ In a Meteor app directory, enter:
 $ meteor add okland:accounts-phone
 ```
 
-
-Via Bower:
-```
-$ bower install accounts-phone
-```
-
-Add to your index.html
-
-```
-<script src="bower_components/accounts-base-client-side/dist/accounts-base-client-side.bundle.min.js"></script>
-<script src="bower_components/accounts-phone/dist/accounts-phone.bundle.min.js"></script>
-```
-
 ## Examples
 
 Let's say you want to register new user and verify him using his phone number
