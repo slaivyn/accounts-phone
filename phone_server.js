@@ -1,3 +1,6 @@
+import { Meteor }   from 'meteor/meteor'
+import { Accounts } from 'meteor/accounts-base'
+
 /// Default Accounts Config vars
 
 var AccountGlobalConfigs = {
@@ -6,7 +9,8 @@ var AccountGlobalConfigs = {
     verificationCodeLength             : 4,
     verificationMaxRetries             : 2,
     forbidClientAccountCreation        : false,
-    sendPhoneVerificationCodeOnCreation: true
+    sendPhoneVerificationCodeOnCreation: true,
+    createUserIfDoesNotExist:            true
 };
 
 _.defaults(Accounts._options, AccountGlobalConfigs);
@@ -14,7 +18,7 @@ _.defaults(Accounts._options, AccountGlobalConfigs);
 
 /// Phone
 
-var Phone = Npm.require('phone');
+import Phone from 'phone'
 
 /// BCRYPT
 
@@ -390,6 +394,9 @@ Meteor.methods({requestPhoneVerification: function (phone) {
             userId = existingUser && existingUser._id;
         } else {
             // Create new user with phone number
+            if(!Accounts._options.createUserIfDoesNotExist) {
+                throw new Meteor.Error(403, "User does not exist")
+            }
             userId = createUser({phone:phone});
         }
     }
@@ -708,4 +715,3 @@ var getRandomCode = function (length) {
 var getRandomDigit = function () {
     return Math.floor((Math.random() * 9) + 1);
 }
-
