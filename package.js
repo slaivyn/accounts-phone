@@ -1,6 +1,6 @@
 Package.describe({
     name         : 'slaivyn:accounts-phone',
-    version      : '0.0.22',
+    version      : '0.0.23',
     summary      : 'A login service based on mobile phone number, For Meteor.',
     git          : 'https://github.com/slaivyn/accounts-phone',
     documentation: 'README.md'

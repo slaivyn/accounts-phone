@@ -56,26 +56,6 @@ Meteor.loginWithPhoneAndPassword = function (selector, password, callback) {
     });
 };
 
-if(Package['accounts-password']) {
-    const _loginWithPassword = Meteor.loginWithPassword
-    Meteor.loginWithPassword = function(selector, password, callback) {
-        console.log("login", selector, password)
-        let username
-        if(typeof selector === 'string' && selector.indexOf('@') === -1) {
-            username = selector
-        } else {
-            if(selector.username) {
-                username = selector.username
-            }
-        }
-        if(username && /^\+33/.test(username)) {
-            Meteor.loginWithPhoneAndPassword({phone: username}, password, callback)
-        } else {
-            _loginWithPassword(selector, password, callback)
-        }
-    }
-}
-
 Accounts._hashPassword = function (password) {
     return {
         digest   : SHA256(password),
