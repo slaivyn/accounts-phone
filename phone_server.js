@@ -162,7 +162,7 @@ var passwordValidator = Match.OneOf(
 // Note that neither password option is secure without SSL.
 //
 Accounts.registerLoginHandler("phone", function (options) {
-    if (!options.password || options.srp)
+    if (!options.password || options.srp || !options.user.phone)
         return undefined; // don't handle
 
     check(options, {
@@ -224,7 +224,7 @@ Accounts.registerLoginHandler("phone", function (options) {
 //
 // XXX COMPAT WITH 0.8.1.3
 Accounts.registerLoginHandler("phone", function (options) {
-    if (!options.srp || !options.password)
+    if (!options.srp || !options.password || !options.user.phone)
         return undefined; // don't handle
 
     check(options, {
